@@ -1,0 +1,23 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
+    <l:layout>
+        <l:main-panel>
+            <h1>${it.displayName}</h1>
+            <h2>Build #${it.buildNumber}'s Output:</h2>
+            <j:set var="testSuite" value="${it.getTestSuite()}"/>
+            <div>
+	            <p>Test suite name: ${testSuite.getName()}</p>
+	            <p>Test suite time: ${testSuite.getTime()}</p>
+	        </div>
+            <j:forEach var="testCase" items="${testSuite.getTestCases()}">
+            <ul style="list-style-type:square">
+            	<li>Test case name: ${testCase.getClassName()}</li>
+            	<ul>
+	            	<li>Test step name: ${testCase.getName()}</li>
+	            	<li>Test step failure message: ${testCase.getFailureMessage()}</li>
+	            	<li>Test step time: ${testCase.getTime()}</li>
+	            </ul>
+            </ul>
+            </j:forEach>
+        </l:main-panel>
+    </l:layout>
+</j:jelly>
