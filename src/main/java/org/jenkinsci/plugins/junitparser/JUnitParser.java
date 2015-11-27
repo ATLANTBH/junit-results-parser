@@ -77,6 +77,11 @@ public class JUnitParser extends Recorder {
 			}
 			
 	    	listener.getLogger().println("Hello, "+name+"!");
+	    	
+	    	//Code added for implementing the buildAction screen
+	    	JUnitParserBuildAction buildAction = new JUnitParserBuildAction(parser.getTestSuite(), build);
+	    	build.addAction(buildAction);
+	    	
 		} catch (Exception e) {
 			listener.getLogger().println(e.getMessage());
 		}
