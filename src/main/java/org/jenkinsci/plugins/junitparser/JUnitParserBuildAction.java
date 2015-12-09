@@ -8,7 +8,6 @@ import hudson.model.Action;
 public class JUnitParserBuildAction implements Action {
 	private AbstractBuild<?, ?> build;
 	private TestSuite testSuite;
-	private String message = "Poz.";
 	
 	@Override
     public String getIconFileName() {
@@ -31,10 +30,6 @@ public class JUnitParserBuildAction implements Action {
     
     public int getBuildNumber() {
         return this.build.number;
-    }
-    
-    public String getMessage() {
-    	return message;
     }
     
     JUnitParserBuildAction(final TestSuite testSuite, final AbstractBuild<?, ?> build)
