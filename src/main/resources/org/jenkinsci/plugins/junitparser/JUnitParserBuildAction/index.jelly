@@ -1,23 +1,36 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
-    <l:layout>
+    <l:layout>	
         <l:main-panel>
+			<link rel="stylesheet" href="${resURL}/plugin/junitparser/styles/style.css" type="text/css"/>
             <h1>${it.displayName}</h1>
             <h2>Build #${it.buildNumber}'s Output:</h2>
             <j:set var="testSuite" value="${it.getTestSuite()}"/>
             <div>
 	            <p>Test suite name: ${testSuite.getName()}</p>
 	            <p>Test suite time: ${testSuite.getTime()}</p>
+	            <p>Test cases:</p>
 	        </div>
-            <j:forEach var="testCase" items="${testSuite.getTestCases()}">
-            <ul style="list-style-type:square">
-            	<li>Test case name: ${testCase.getClassName()}</li>
-            	<ul>
-	            	<li>Test step name: ${testCase.getName()}</li>
-	            	<li>Test step failure message: ${testCase.getFailureMessage()}</li>
-	            	<li>Test step time: ${testCase.getTime()}</li>
+	        <div class="tree">
+	            <j:forEach var="testCase" items="${testSuite.getTestCases()}">
+	            <ul>
+	            	<li><a>${testCase.getClassName()}</a>
+		            	<ul>
+			            	<j:set var="failureMessage" value="${testCase.getFailureMessage()}"/>
+			            	<j:if test="${failureMessage==null}">
+				            	<li>Test step name: ${testCase.getName()}</li>
+			            		<li>Test step time: ${testCase.getTime()}</li>
+			            	</j:if>
+		            		<j:if test="${failureMessage!=null}">
+				            	<li>Test step name: ${testCase.getName()}</li>
+			            		<li>Test step failure message: ${testCase.getFailureMessage()}</li>
+			            		<li>Test step time: ${testCase.getTime()}</li>
+			            	</j:if>
+			            </ul>
+			    	</li>
 	            </ul>
-            </ul>
-            </j:forEach>
+	            </j:forEach>
+            </div>
+            <script src="${resURL}/plugin/junitparser/js/results-tree.js"></script>
         </l:main-panel>
-    </l:layout>
+    </l:layout>    
 </j:jelly>
