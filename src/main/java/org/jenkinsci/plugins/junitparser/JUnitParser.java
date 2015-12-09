@@ -2,15 +2,15 @@ package org.jenkinsci.plugins.junitparser;
 import hudson.Launcher;
 import hudson.Extension;
 import hudson.util.FormValidation;
+import net.sf.json.JSONObject;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.tasks.Builder;
+import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
-import hudson.tasks.*;
-import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.w3c.dom.NodeList;
@@ -18,9 +18,10 @@ import org.w3c.dom.NodeList;
 import org.kohsuke.stapler.QueryParameter;
 
 import javax.servlet.ServletException;
+
+import java.io.File;
 import java.io.IOException;
 
-import org.jenkinsci.plugins.junitparser.model.TestCase;
 import org.jenkinsci.plugins.junitparser.parser.Parser;
 
 /**
@@ -62,21 +63,7 @@ public class JUnitParser extends Recorder {
 		NodeList nodeList;
 		try {
 			nodeList = parser.getStartNode(name);
-			parser.parseXml(nodeList);
-			
-			listener.getLogger().println("Test suite name: " + parser.getTestSuite().getName());
-			listener.getLogger().println("Test suite number of tests: " + parser.getTestSuite().getTests());
-			listener.getLogger().println("Test suite number of failed tests: " + parser.getTestSuite().getFailures());
-			listener.getLogger().println("Test suite time: " + parser.getTestSuite().getTime());
-			
-			for (TestCase testCase : parser.getTestSuite().getTestCases()) {
-				listener.getLogger().println("Test case name: " + testCase.getClassName());
-				listener.getLogger().println("Test step name: " + testCase.getName());
-				listener.getLogger().println("Test step failure message: " + testCase.getFailureMessage());
-				listener.getLogger().println("Test step time: " + testCase.getTime());
-			}
-			
-	    	listener.getLogger().println("Hello, "+name+"!");
+			parser.parseJUnitResults(nodeList);			
 	    	
 	    	//Code added for implementing the buildAction screen
 	    	JUnitParserBuildAction buildAction = new JUnitParserBuildAction(parser.getTestSuite(), build);
@@ -139,8 +126,12 @@ public class JUnitParser extends Recorder {
                 throws IOException, ServletException {
             if (value.length() == 0)
                 return FormValidation.error("Please set a name");
-            if (value.length() < 4)
-                return FormValidation.warning("Isn't the name too short?");
+            if (value.length() > 0) {
+            	File inputFile = new File(value);
+            	if (!inputFile.isFile()) {
+            	  return FormValidation.error("Please set correct file location");
+            	}
+            }
             return FormValidation.ok();
         }
 
@@ -153,7 +144,7 @@ public class JUnitParser extends Recorder {
          * This human readable name is used in the configuration screen.
          */
         public String getDisplayName() {
-            return "Parse JUnit results to stdout!";
+            return "Publish JUnit test results";
         }
 
         @Override

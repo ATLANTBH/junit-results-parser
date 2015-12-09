@@ -45,13 +45,13 @@ public class Parser {
 		}
 		
 		if (nodeList == null) {
-			throw new Exception("Node list has not been populated!");
+			throw new Exception("ERROR: Data not populated correctly! Please check your input file location and format");
 		} else {
 			return nodeList;
 		}
 	}
 	
-	public void parseXml(NodeList nodeList) throws IOException, ParserConfigurationException {
+	public void parseJUnitResults(NodeList nodeList) throws IOException, ParserConfigurationException {
 			
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node node = nodeList.item(i);
@@ -71,7 +71,7 @@ public class Parser {
 					testCase.setClassName(element.getAttribute("classname"));
 				    testCase.setName(element.getAttribute("name"));
 				    testCase.setTime(element.getAttribute("time"));
-
+				    
 				    NodeList childNodeList = element.getChildNodes();
 				    for (int j = 0; j < childNodeList.getLength(); j++) {
 				    	Node childNode = childNodeList.item(j);
@@ -87,7 +87,7 @@ public class Parser {
 			}
 			
 			if (node.hasChildNodes()) {
-				parseXml(node.getChildNodes());
+				parseJUnitResults(node.getChildNodes());
 			}
 		}
 	}
