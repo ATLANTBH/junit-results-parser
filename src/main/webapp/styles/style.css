@@ -5,7 +5,6 @@
     line-height: 25px;
 }
 .tree > ul > li > a {
-    color: #3B4C56;
     display: block;
     font-weight: normal;
     position: relative;
@@ -15,7 +14,6 @@
     padding: 0 0 0 28px;
 }
 .tree li.parent > a:before {
-    background-image: url("../images/plus_minus_icons.png");
     background-position: 25px center;
      content: ""; 
     display: block;
@@ -47,6 +45,25 @@
     top: 12px;
     width: 15px;
 }
+
+.test-success {
+	color: #008000;
+}
+
+.test-failure {
+	color: #B22222;
+}
+
+.test-success li > a {
+	background-image: url("../images/success.png");
+	background-repeat: no-repeat;
+}
+
+.test-failure li > a {
+	background-image: url("../images/failure.png");
+	background-repeat: no-repeat;
+}
+
 #wrapper {
     margin: 0 auto;
     width: 300px;
