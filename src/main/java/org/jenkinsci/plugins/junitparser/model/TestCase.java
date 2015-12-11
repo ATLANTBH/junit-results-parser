@@ -1,19 +1,24 @@
 package org.jenkinsci.plugins.junitparser.model;
 
+import java.util.ArrayList;
+
 /*
- * This class will be used as list of test steps where each test step which as same className
- * will belong to the same test case
- * name is test step name while className is test case name
+ * This class serves as container of test steps and gives additional info on test case level
  */
 public class TestCase {
-	
 	private String className;
-	private String name;
-	private String time;
-	private String failureMessage;
+	private ArrayList<TestStep> testSteps = new ArrayList<TestStep>();
 	
 	public TestCase() {
 		super();
+	}
+	
+	public ArrayList<TestStep> getTestSteps() {
+		return testSteps;
+	}
+	
+	public void addTestStep(TestStep testStep) {
+		this.testSteps.add(testStep);
 	}
 	
 	public String getClassName() {
@@ -22,29 +27,5 @@ public class TestCase {
 	
 	public void setClassName(String className) {
 		this.className = className;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getTime() {
-		return time;
-	}
-	
-	public void setTime(String time) {
-		this.time = time;
-	}
-	
-	public String getFailureMessage() {
-		return failureMessage;
-	}
-	
-	public void setFailureMessage(String failureMessage) {
-		this.failureMessage = failureMessage;
 	}
 }
