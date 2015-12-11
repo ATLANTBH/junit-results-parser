@@ -94,27 +94,27 @@ public class Parser {
 					TestCase testCase = new TestCase();
 					testCase.setClassName(element.getAttribute("classname"));
 					TestStep testStep = new TestStep();
-				    testStep.setName(element.getAttribute("name"));
-				    testStep.setTime(element.getAttribute("time"));
-					
+					testStep.setName(element.getAttribute("name"));
+					testStep.setTime(element.getAttribute("time"));
+
 					if (this.testCases.isEmpty()) {
 						testStep = setFailureMessage(testStep, element);
-					    testCase.addTestStep(testStep);
-					    this.testCases.add(testCase);
+						testCase.addTestStep(testStep);
+						this.testCases.add(testCase);
 					} else {
 						boolean exists = false;
 						for (TestCase tCase : this.testCases) {
-	  			  		    if (tCase.getClassName().equals(testCase.getClassName())) {
+							if (tCase.getClassName().equals(testCase.getClassName())) {
 								testStep = setFailureMessage(testStep, element);
-							    tCase.addTestStep(testStep);
-							    exists = true;
-							    break;
+								tCase.addTestStep(testStep);
+								exists = true;
+								break;
 							}
 						}
 						if (exists == false) {
 							testStep = setFailureMessage(testStep, element);
-						    testCase.addTestStep(testStep);
-						    this.testCases.add(testCase);
+							testCase.addTestStep(testStep);
+							this.testCases.add(testCase);
 						}
 					}
 				}				
