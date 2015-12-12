@@ -16,7 +16,7 @@
 	            <j:set var="failureMessage" value="${testCase.getFailureMessage()}"/>
             	<j:if test="${failureMessage==null}">
 	            <ul class="test-success">
-	            	<li><a>${testCase.getName()}</a>
+            		<li><a>${testCase.getName()}</a>
 		            	<ul>
 			            	<li class="test-success">Test step name: ${testCase.getName()}</li>
 		            		<li class="test-success">Test step time: ${testCase.getTime()}</li>

@@ -64,6 +64,11 @@
 	background-repeat: no-repeat;
 }
 
+.test-class li> a {
+	background-image: url("../images/failure.png");
+	background-repeat: no-repeat;
+}
+
 #wrapper {
     margin: 0 auto;
     width: 300px;
