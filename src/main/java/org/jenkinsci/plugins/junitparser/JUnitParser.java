@@ -22,6 +22,8 @@ import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 
+import org.jenkinsci.plugins.junitparser.model.TestCase;
+import org.jenkinsci.plugins.junitparser.model.TestStep;
 import org.jenkinsci.plugins.junitparser.parser.Parser;
 
 /**
@@ -63,14 +65,28 @@ public class JUnitParser extends Recorder {
 		NodeList nodeList;
 		try {
 			nodeList = parser.getStartNode(name);
-			parser.parseJUnitResults(nodeList);			
+			parser.parseJUnitResults(nodeList);	
+			parser.addTestCasesToTestSuite();
+			
+			// BAKIR: Added for purposes of getting these data to front-end. Once implemented, delete it!			
+			listener.getLogger().println("Test suite: " + parser.getTestSuite().getName());
+			listener.getLogger().println("---------");
+
+			for (TestCase testCase : parser.getTestSuite().getTestCases()) {
+				listener.getLogger().println("Test case: " + testCase.getClassName());
+			    for (TestStep testStep : testCase.getTestSteps()) {
+				  listener.getLogger().println("Test step: " + testStep.getName() + "..." + testStep.getTime() + "..." + testStep.getFailureMessage());
+			    }
+			    listener.getLogger().println("---------");
+			}
 	    	
-	    	//Code added for implementing the buildAction screen
+	    	// Code added for implementing the buildAction screen
 	    	JUnitParserBuildAction buildAction = new JUnitParserBuildAction(parser.getTestSuite(), build);
 	    	build.addAction(buildAction);
 	    	
 		} catch (Exception e) {
 			listener.getLogger().println(e.getMessage());
+			listener.getLogger().println(e.getStackTrace());
 		}
 		return true;
     }
@@ -125,7 +141,7 @@ public class JUnitParser extends Recorder {
         public FormValidation doCheckName(@QueryParameter String value)
                 throws IOException, ServletException {
             if (value.length() == 0)
-                return FormValidation.error("Please set a name");
+                return FormValidation.error("Please set correct file location");
             if (value.length() > 0) {
             	File inputFile = new File(value);
             	if (!inputFile.isFile()) {
