@@ -13,36 +13,57 @@
 	        </div>
 	        <div class="tree">
 	            <j:forEach var="testCase" items="${testSuite.getTestCases()}">
-	            <j:set var="ul-class-name" value="${it.getString('test-success')}"/>
-	            <j:forEach var="testStep" items="${testCase.getTestSteps()}">
-	            	<j:if test="${testStep.getFailureMessage() != null}">
-	            		<j:set var="ul-class-name" value="${it.getString('test-failure')}"/>
+		            <j:if test="${!testCase.getHasFailed()}">
+	            		<ul class="test-success">
+		            		<li><a>${testCase.getClassName()}</a>
+		            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
+					            	<ul>
+					            		<j:if test="${testStep.getFailureMessage() == null}">
+							            	<li><a class="test-success-child">Test step: ${testStep.getName()}</a>
+							            		<ul>
+						            				<li class="success-text">Time: ${testStep.getTime()}</li>
+						            			</ul>
+						            		</li>
+					            		</j:if>
+					            		<j:if test="${testStep.getFailureMessage() != null}">
+					            			<li><a class="test-failure-child">Test step: ${testStep.getName()}</a>
+							            		<ul>
+							            			<li class="failure-text">Failure: ${testStep.getFailureMessage()}</li>
+						            				<li class="failure-text">Time: ${testStep.getTime()}</li>
+						            			</ul>
+						            		</li>
+					            		</j:if>
+					            	</ul>
+				            	</j:forEach>
+			            	</li>
+			            </ul>
 	            	</j:if>
-	            </j:forEach>
-	            <ul class="${it.getString('test-failure')}">
-            		<li><a>${testCase.getClassName()}</a>
-            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
-			            	<ul>
-			            		<j:if test="${testStep.getFailureMessage() == null}">
-					            	<li><a class="test-success-child">Test step: ${testStep.getName()}</a>
-					            		<ul>
-				            				<li class="success-text">Time: ${testStep.getTime()}</li>
-				            			</ul>
-				            		</li>
-			            		</j:if>
-			            		<j:if test="${testStep.getFailureMessage() != null}">
-			            			<li><a class="test-failure-child">Test step: ${testStep.getName()}</a>
-					            		<ul>
-					            			<li class="failure-text">Failure: ${testStep.getFailureMessage()}</li>
-				            				<li class="failure-text">Time: ${testStep.getTime()}</li>
-				            			</ul>
-				            		</li>
-			            		</j:if>
-			            	</ul>
-		            	</j:forEach>
-	            	</li>
-	            </ul>
-	        </j:forEach>
+	            	<j:if test="${testCase.getHasFailed()}">
+	            		<ul class="test-failure">
+	            			<li><a>${testCase.getClassName()}</a>
+	            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
+				            	<ul>
+				            		<j:if test="${testStep.getFailureMessage() == null}">
+						            	<li><a class="test-success-child">Test step: ${testStep.getName()}</a>
+						            		<ul>
+					            				<li class="success-text">Time: ${testStep.getTime()}</li>
+					            			</ul>
+					            		</li>
+				            		</j:if>
+				            		<j:if test="${testStep.getFailureMessage() != null}">
+				            			<li><a class="test-failure-child">Test step: ${testStep.getName()}</a>
+						            		<ul>
+						            			<li class="failure-text">Failure: ${testStep.getFailureMessage()}</li>
+					            				<li class="failure-text">Time: ${testStep.getTime()}</li>
+					            			</ul>
+					            		</li>
+				            		</j:if>
+				            	</ul>
+			            	</j:forEach>
+		            	</li>
+		            </ul>
+            		</j:if>
+	        	</j:forEach>
             </div>
             <script src="${resURL}/plugin/junitparser/js/results-tree.js"></script>
         </l:main-panel>
