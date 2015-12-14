@@ -17,12 +17,12 @@
     background-position: 25px center;
      content: ""; 
     display: block;
-    height: 21px;
+    height: 25px;
     left: 0;
     position: absolute;
     top: 2px;
     vertical-align: middle;
-    width: 23px;
+    width: 25px;
 }
 .tree ul li.active > a:before {
     background-position: 0 center;
@@ -46,27 +46,36 @@
     width: 15px;
 }
 
-.test-success {
+.test-success a {
+	background-image: url("../images/success.png");
+	background-repeat: no-repeat;
 	color: #008000;
 }
 
-.test-failure {
+.test-failure a {
+	background-image: url("../images/failure.png");
+	background-repeat: no-repeat;
 	color: #B22222;
 }
 
-.test-success li > a {
-	background-image: url("../images/success.png");
+a.test-success-child {
+	background-image: url("../images/rsz_success.png");
 	background-repeat: no-repeat;
+	color: #008000;
 }
 
-.test-failure li > a {
-	background-image: url("../images/failure.png");
+a.test-failure-child {
+	background-image: url("../images/rsz_failure.png");
 	background-repeat: no-repeat;
+	color: #B22222;
 }
 
-.test-class li> a {
-	background-image: url("../images/failure.png");
-	background-repeat: no-repeat;
+li.success-text {
+	color: #008000;
+}
+
+li.failure-text {
+	color: #B22222;
 }
 
 #wrapper {

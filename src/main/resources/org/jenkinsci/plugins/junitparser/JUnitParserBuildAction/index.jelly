@@ -7,34 +7,41 @@
             <h2>Test suite name: ${testSuite.getName()}</h2>
             <div>
             <j:if test="${testSuite.getFailures()!='0'}">
-	            <h2 class="test-failure">Failures: ${testSuite.getFailures()}</h2>
+	            <h2 class="test-failure-text" style="color: #B22222">Failures: ${testSuite.getFailures()}</h2>
 	        </j:if>
 	            <p>Test cases:</p>
 	        </div>
 	        <div class="tree">
 	            <j:forEach var="testCase" items="${testSuite.getTestCases()}">
-	            <j:set var="failureMessage" value="${testCase.getFailureMessage()}"/>
-            	<j:if test="${failureMessage==null}">
-	            <ul class="test-success">
-            		<li><a>${testCase.getName()}</a>
-		            	<ul>
-			            	<li class="test-success">Test step name: ${testCase.getName()}</li>
-		            		<li class="test-success">Test step time: ${testCase.getTime()}</li>
-		            	</ul>
+	            <j:set var="ul-class-name" value="${it.getString('test-success')}"/>
+	            <j:forEach var="testStep" items="${testCase.getTestSteps()}">
+	            	<j:if test="${testStep.getFailureMessage() != null}">
+	            		<j:set var="ul-class-name" value="${it.getString('test-failure')}"/>
+	            	</j:if>
+	            </j:forEach>
+	            <ul class="${it.getString('test-failure')}">
+            		<li><a>${testCase.getClassName()}</a>
+            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
+			            	<ul>
+			            		<j:if test="${testStep.getFailureMessage() == null}">
+					            	<li><a class="test-success-child">Test step: ${testStep.getName()}</a>
+					            		<ul>
+				            				<li class="success-text">Time: ${testStep.getTime()}</li>
+				            			</ul>
+				            		</li>
+			            		</j:if>
+			            		<j:if test="${testStep.getFailureMessage() != null}">
+			            			<li><a class="test-failure-child">Test step: ${testStep.getName()}</a>
+					            		<ul>
+					            			<li class="failure-text">Failure: ${testStep.getFailureMessage()}</li>
+				            				<li class="failure-text">Time: ${testStep.getTime()}</li>
+				            			</ul>
+				            		</li>
+			            		</j:if>
+			            	</ul>
+		            	</j:forEach>
 	            	</li>
 	            </ul>
-	            </j:if>
-            	<j:if test="${failureMessage!=null}">
-	            <ul class="test-failure">
-	            	<li><a>${testCase.getName()}</a>
-	            		<ul>
-			            	<li class="test-failure">Test step name: ${testCase.getName()}</li>
-		            		<li class="test-failure">Test step failure message: ${testCase.getFailureMessage()}</li>
-		            		<li class="test-failure">Test step time: ${testCase.getTime()}</li>
-		            	</ul>
-		            </li>
-		        </ul>
-		    </j:if>
 	        </j:forEach>
             </div>
             <script src="${resURL}/plugin/junitparser/js/results-tree.js"></script>
