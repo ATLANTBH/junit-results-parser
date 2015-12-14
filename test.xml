@@ -13,13 +13,18 @@
          <skipped />
       </testcase>
       <testcase classname="JUnitXmlReporter.constructor.testcase" name="should default useDotNotation to true" time="0.4" />
-      <testcase classname="JUnitXmlReporter.constructor.testcase2" name="should default path to an empty string" time="0.2">
-         <failure message="test failure">Assertion failed</failure>
-      </testcase>
+      <testcase classname="JUnitXmlReporter.constructor.testcase2" name="should default path to an empty string" time="0.2"/>
       <testcase classname="JUnitXmlReporter.constructor.testcase2" name="should default consolidate to true" time="0.4">
          <skipped />
       </testcase>
       <testcase classname="JUnitXmlReporter.constructor.testcase2" name="should default useDotNotation to true" time="0.4" />
+      <testcase classname="JUnitXmlReporter.constructor.testcase" name="should default path to an empty string" time="0.2">
+         <failure message="test failure">Assertion failed</failure>
+      </testcase>
+      <testcase classname="JUnitXmlReporter.constructor.testcase" name="should default consolidate to true" time="0.4">
+         <skipped />
+      </testcase>
+      <testcase classname="JUnitXmlReporter.constructor.testcase" name="should default useDotNotation to true something" time="0.4" />
    </testsuite>
 </testsuites>
  
