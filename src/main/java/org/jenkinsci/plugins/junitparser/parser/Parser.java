@@ -105,7 +105,7 @@ public class Parser {
 						boolean exists = false;
 						for (TestCase tCase : this.testCases) {
 							if (tCase.getClassName().equals(testCase.getClassName())) {
-								testStep = setFailureMessage(testStep, element);
+								testStep = setFailureMessage(testStep, element);			
 								tCase.addTestStep(testStep);
 								exists = true;
 								break;
