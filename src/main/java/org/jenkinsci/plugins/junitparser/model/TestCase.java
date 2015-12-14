@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class TestCase {
 	private String className;
 	private ArrayList<TestStep> testSteps = new ArrayList<TestStep>();
-	private boolean hasFailed;
+	private boolean failed;
 	
 	public TestCase() {
 		super();
@@ -19,8 +19,10 @@ public class TestCase {
 	}
 	
 	public void addTestStep(TestStep testStep) {
-		if (!testStep.getFailureMessage().isEmpty()) {
-			hasFailed = true;
+		if (testStep.getFailureMessage() != null) {
+			if (!testStep.getFailureMessage().isEmpty()) {
+				failed = true;
+			}
 		}
 		this.testSteps.add(testStep);
 	}
@@ -33,7 +35,7 @@ public class TestCase {
 		this.className = className;
 	}
 	
-	public boolean getHasFailed() {
-		return hasFailed;
+	public boolean isFailed() {
+		return failed;
 	}
 }
