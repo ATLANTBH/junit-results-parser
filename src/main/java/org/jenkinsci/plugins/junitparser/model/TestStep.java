@@ -8,6 +8,7 @@ public class TestStep {
 	private String name;
 	private String time;
 	private String failureMessage;
+	private String errors;
 	
 	public TestStep() {
 		super();
@@ -36,4 +37,8 @@ public class TestStep {
 	public void setFailureMessage(String failureMessage) {
 		this.failureMessage = failureMessage;
 	}
+
+    public String getErrors() { return errors; }
+
+    public void setErrors(String errors) { this.errors = errors; }
 }

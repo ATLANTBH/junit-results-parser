@@ -76,7 +76,7 @@ public class JUnitParser extends Recorder {
 				listener.getLogger().println("Test case: " + testCase.getClassName());
 				listener.getLogger().println("Test case failed: " + testCase.isFailed());
 			    for (TestStep testStep : testCase.getTestSteps()) {
-				  listener.getLogger().println("Test step: " + testStep.getName() + "..." + testStep.getTime() + "..." + testStep.getFailureMessage());
+				  listener.getLogger().println("Test step: " + testStep.getName() + "..." + testStep.getTime() + "..." + testStep.getFailureMessage() + "..." + testStep.getErrors());
 			    }
 			    listener.getLogger().println("---------");
 			}

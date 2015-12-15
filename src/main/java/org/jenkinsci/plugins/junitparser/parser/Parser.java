@@ -69,6 +69,7 @@ public class Parser {
 	    		Element childElement = (Element) childNode;
 	    		if (childNode.getNodeName() == "failure") {
 	    			testStep.setFailureMessage(childElement.getAttribute("message"));
+					testStep.setErrors(childElement.getTextContent());
 	    		}    		
 	    	}
 	    }
