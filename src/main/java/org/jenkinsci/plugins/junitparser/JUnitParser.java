@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import org.jenkinsci.plugins.junitparser.model.TestCase;
 import org.jenkinsci.plugins.junitparser.model.TestStep;
@@ -76,7 +77,11 @@ public class JUnitParser extends Recorder {
 				listener.getLogger().println("Test case: " + testCase.getClassName());
 				listener.getLogger().println("Test case failed: " + testCase.isFailed());
 			    for (TestStep testStep : testCase.getTestSteps()) {
-				  listener.getLogger().println("Test step: " + testStep.getName() + "..." + testStep.getTime() + "..." + testStep.getFailureMessage() + "..." + testStep.getErrors());
+                    listener.getLogger().println("Test step: " + testStep.getName() + "..." + testStep.getTime());
+                    for (Map.Entry<String, String> entry : testStep.getAssertionFailuresList().entrySet()) {
+                        listener.getLogger().println("Message: " + entry.getKey());
+                        listener.getLogger().println("Value: " + entry.getValue());
+                    }
 			    }
 			    listener.getLogger().println("---------");
 			}

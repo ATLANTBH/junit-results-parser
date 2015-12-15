@@ -1,6 +1,7 @@
 package org.jenkinsci.plugins.junitparser.model;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /*
  * This class serves as container of test steps and gives additional info on test case level
@@ -19,11 +20,13 @@ public class TestCase {
 	}
 	
 	public void addTestStep(TestStep testStep) {
-		if (testStep.getFailureMessage() != null) {
-			if (!testStep.getFailureMessage().isEmpty()) {
-				failed = true;
-			}
-		}
+        for (Map.Entry<String, String> entry : testStep.getAssertionFailuresList().entrySet()) {
+            if (entry.getKey() != null) {
+                if (!entry.getKey().isEmpty()) {
+                    failed = true;
+                }
+            }
+        }
 		this.testSteps.add(testStep);
 	}
 	

@@ -1,5 +1,8 @@
 package org.jenkinsci.plugins.junitparser.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * This class is used for test steps information
  */
@@ -7,9 +10,8 @@ public class TestStep {
 	
 	private String name;
 	private String time;
-	private String failureMessage;
-	private String errors;
-	
+    private Map<String, String> assertionFailuresList = new HashMap<String, String>();
+
 	public TestStep() {
 		super();
 	}
@@ -29,16 +31,12 @@ public class TestStep {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	
-	public String getFailureMessage() {
-		return failureMessage;
-	}
-	
-	public void setFailureMessage(String failureMessage) {
-		this.failureMessage = failureMessage;
-	}
 
-    public String getErrors() { return errors; }
+    public Map<String, String> getAssertionFailuresList() {
+        return assertionFailuresList;
+    }
 
-    public void setErrors(String errors) { this.errors = errors; }
+    public void setAssertionFailures(String message, String value) {
+        this.assertionFailuresList.put(message, value);
+    }
 }

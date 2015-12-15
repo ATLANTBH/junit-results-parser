@@ -3,6 +3,7 @@ package org.jenkinsci.plugins.junitparser.parser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -68,8 +69,7 @@ public class Parser {
 	    	if (childNode.getNodeType() == Node.ELEMENT_NODE) {
 	    		Element childElement = (Element) childNode;
 	    		if (childNode.getNodeName() == "failure") {
-	    			testStep.setFailureMessage(childElement.getAttribute("message"));
-					testStep.setErrors(childElement.getTextContent());
+                    testStep.setAssertionFailures(childElement.getAttribute("message"), childElement.getTextContent());
 	    		}    		
 	    	}
 	    }
