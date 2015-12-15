@@ -13,7 +13,7 @@
 	        </div>
 	        <div class="tree">
 	            <j:forEach var="testCase" items="${testSuite.getTestCases()}">
-		            <j:if test="${!testCase.getHasFailed()}">
+		            <j:if test="${!testCase.isFailed()}">
 	            		<ul class="test-success">
 		            		<li><a>${testCase.getClassName()}</a>
 		            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
@@ -38,7 +38,7 @@
 			            	</li>
 			            </ul>
 	            	</j:if>
-	            	<j:if test="${testCase.getHasFailed()}">
+	            	<j:if test="${testCase.isFailed()}">
 	            		<ul class="test-failure">
 	            			<li><a>${testCase.getClassName()}</a>
 	            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
