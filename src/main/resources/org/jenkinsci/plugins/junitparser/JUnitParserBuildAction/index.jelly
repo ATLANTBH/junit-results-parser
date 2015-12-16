@@ -18,21 +18,11 @@
 		            		<li><a>${testCase.getClassName()}</a>
 		            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
 					            	<ul>
-					            		<j:if test="${testStep.getFailureMessage() == null}">
-							            	<li><a class="test-success-child">Test step: ${testStep.getName()}</a>
-							            		<ul>
-						            				<li class="success-text">Time: ${testStep.getTime()}</li>
-						            			</ul>
-						            		</li>
-					            		</j:if>
-					            		<j:if test="${testStep.getFailureMessage() != null}">
-					            			<li><a class="test-failure-child">Test step: ${testStep.getName()}</a>
-							            		<ul>
-							            			<li class="failure-text">Failure: ${testStep.getFailureMessage()}</li>
-						            				<li class="failure-text">Time: ${testStep.getTime()}</li>
-						            			</ul>
-						            		</li>
-					            		</j:if>
+						            	<li><a class="test-success-child">Test step: ${testStep.getName()}</a>
+						            		<ul>
+					            				<li class="success-text">Time: ${testStep.getTime()}</li>
+					            			</ul>
+					            		</li>
 					            	</ul>
 				            	</j:forEach>
 			            	</li>
@@ -43,17 +33,19 @@
 	            			<li><a>${testCase.getClassName()}</a>
 	            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
 				            	<ul>
-				            		<j:if test="${testStep.getFailureMessage() == null}">
+				            		<j:if test="${testStep.getAssertionFailuresList().isEmpty()}">
 						            	<li><a class="test-success-child">Test step: ${testStep.getName()}</a>
 						            		<ul>
 					            				<li class="success-text">Time: ${testStep.getTime()}</li>
 					            			</ul>
 					            		</li>
 				            		</j:if>
-				            		<j:if test="${testStep.getFailureMessage() != null}">
+				            		<j:if test="${!testStep.getAssertionFailuresList().isEmpty()}">
 				            			<li><a class="test-failure-child">Test step: ${testStep.getName()}</a>
 						            		<ul>
-						            			<li class="failure-text">Failure: ${testStep.getFailureMessage()}</li>
+						            			<j:forEach var="testFailure" items="${testStep.getAssertionFailuresList()}">
+						            				<li class="failure-text">${testFailure.getKey()}: ${testFailure.getValue()}</li>
+						            			</j:forEach>
 					            				<li class="failure-text">Time: ${testStep.getTime()}</li>
 					            			</ul>
 					            		</li>
