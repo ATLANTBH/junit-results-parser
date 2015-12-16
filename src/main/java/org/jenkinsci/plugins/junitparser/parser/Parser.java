@@ -3,7 +3,7 @@ package org.jenkinsci.plugins.junitparser.parser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -33,27 +33,27 @@ public class Parser {
 	}
 	
 	public NodeList getStartNode(String fileLocation) throws Exception {
-		File fXmlFile = new File(fileLocation);
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		NodeList nodeList = null;
-		try {
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-			doc.getDocumentElement().normalize();
-			nodeList = doc.getElementsByTagName("testsuite");
-		} catch (ParserConfigurationException e) {
-			e.getMessage();
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.getMessage();
-			e.printStackTrace();
-		}
-		
-		if (nodeList == null) {
-			throw new Exception("ERROR: Data not populated correctly! Please check your input file location and format");
-		} else {
-			return nodeList;
-		}
+        File fXmlFile = new File(fileLocation);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        NodeList nodeList = null;
+        try {
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+            doc.getDocumentElement().normalize();
+            nodeList = doc.getElementsByTagName("testsuite");
+        } catch (ParserConfigurationException e) {
+            e.getMessage();
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+
+        if (nodeList == null) {
+            throw new Exception("ERROR: Data not populated correctly! Please check your input file location and format");
+        } else {
+            return nodeList;
+        }
 	}
 	
 	public void addTestCasesToTestSuite() {

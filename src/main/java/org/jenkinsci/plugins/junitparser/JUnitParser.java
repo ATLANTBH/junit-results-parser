@@ -21,7 +21,9 @@ import javax.servlet.ServletException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.List;
 
 import org.jenkinsci.plugins.junitparser.model.TestCase;
 import org.jenkinsci.plugins.junitparser.model.TestStep;
@@ -65,9 +67,12 @@ public class JUnitParser extends Recorder {
     	Parser parser = new Parser();
 		NodeList nodeList;
 		try {
-			nodeList = parser.getStartNode(name);
-			parser.parseJUnitResults(nodeList);	
-			parser.addTestCasesToTestSuite();
+            List<String> fileLocations = Arrays.asList(name.split(","));
+            for (String fileLocation : fileLocations) {
+                nodeList = parser.getStartNode(fileLocation);
+                parser.parseJUnitResults(nodeList);
+            }
+            parser.addTestCasesToTestSuite();
 			
 			// BAKIR: Added for purposes of getting these data to front-end. Once implemented, delete it!			
 			listener.getLogger().println("Test suite: " + parser.getTestSuite().getName());
@@ -149,10 +154,13 @@ public class JUnitParser extends Recorder {
             if (value.length() == 0)
                 return FormValidation.error("Please set correct file location");
             if (value.length() > 0) {
-            	File inputFile = new File(value);
-            	if (!inputFile.isFile()) {
-            	  return FormValidation.error("Please set correct file location");
-            	}
+                List<String> filesList = Arrays.asList(value.split(","));
+                for (String file : filesList) {
+                    File inputFile = new File(file);
+                    if (!inputFile.isFile()) {
+                      return FormValidation.error("Please set correct file location");
+                    }
+                }
             }
             return FormValidation.ok();
         }
