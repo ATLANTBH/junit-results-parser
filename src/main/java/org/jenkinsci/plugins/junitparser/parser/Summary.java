@@ -12,6 +12,7 @@ public class Summary {
     private int totalSuccess;
     private int totalFailed;
     private int totalTests;
+    private double totalExecutionTime;
     private ArrayList<TestSuite> testSuites = new ArrayList<TestSuite>();
 
     public Summary() {
@@ -30,6 +31,10 @@ public class Summary {
         return totalTests;
     }
 
+    public double getTotalExecutionTime() {
+        return totalExecutionTime;
+    }
+
     public void addTestSuite(TestSuite testSuite) {
         this.testSuites.add(testSuite);
     }
@@ -38,6 +43,7 @@ public class Summary {
         for (TestSuite testSuite : this.testSuites) {
             totalTests = totalTests + Integer.parseInt(testSuite.getTests());
             totalFailed = totalFailed + Integer.parseInt(testSuite.getFailures());
+            totalExecutionTime = totalExecutionTime + Double.parseDouble(testSuite.getTime());
         }
         totalSuccess = totalTests - totalFailed;
     }

@@ -8,9 +8,10 @@
                 <h1>${it.displayName}</h1>
                 <h2>Test suite name: ${testSuite.getName()}</h2>
                 <canvas id="myChart" width="300" height="300"></canvas>
-	            <h2>Number of tests: ${summary.getTotalTests()}</h2>
-	            <h2 class="success-text">Success: ${summary.getTotalSuccess()}</h2>
-                <h2 class="failure-text">Failures: ${summary.getTotalFailed()}</h2>
+	            <p>Number of tests: ${summary.getTotalTests()}</p>
+	            <p>Success: ${summary.getTotalSuccess()}</p>
+                <p>Failures: ${summary.getTotalFailed()}</p>
+                <p>Total time: ${summary.getTotalExecutionTime()}</p>
             </div>
 	        <div class="tree">
 	            <h2>Test cases:</h2>
