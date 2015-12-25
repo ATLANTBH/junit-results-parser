@@ -13,9 +13,10 @@
     <testcase classname="Smoke test" name="httpSample: Get blob - text/plain 1-1" time="73"/>
     <testcase classname="Smoke test" name="httpSample: Get metadata - text/plain 1-1" time="109"/>
     <testcase classname="Smoke test" name="httpSample: Get blob (pub) - text/plain 1-1" time="96">
-      <failure message="Response Code Assertion">Test failed: code expected to contain /201/</failure>
-      <failure message="Header Assertion">Test failed: code expected to contain header</failure>
-      <failure message="MD5 Assertion">Test failed: code expected to contain md5 hash</failure>
+        <failure message="Response Code Assertion">Test failed: code expected to contain /201/</failure>
+        <failure message="Header Assertion">Test failed: code expected to contain header</failure>
+        <failure message="MD5 Assertion">Test failed: code expected to contain md5 hash</failure>
+        <failure message="MD5 Assertion empty"/>
     </testcase>
     <testcase classname="Smoke test" name="httpSample: Get metadata list - text/plain 1-1" time="889"/>
     <testcase classname="Smoke test" name="httpSample: Delete blob - text/plain 1-1" time="122"/>
