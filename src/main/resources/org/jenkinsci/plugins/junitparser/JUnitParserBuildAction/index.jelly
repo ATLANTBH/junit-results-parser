@@ -3,15 +3,18 @@
         <l:main-panel>
 			<link rel="stylesheet" href="${resURL}/plugin/junitparser/styles/style.css" type="text/css"/>
             <j:set var="testSuite" value="${it.getTestSuite()}"/>
-            <h1>${it.displayName}</h1>
-            <h2>Test suite name: ${testSuite.getName()}</h2>
+            <j:set var="summary" value="${it.getSummary()}"/>
             <div>
-            <j:if test="${testSuite.getFailures()!='0'}">
-	            <h2 class="test-failure-text" style="color: #B22222">Failures: ${testSuite.getFailures()}</h2>
-	        </j:if>
-	            <p>Test cases:</p>
-	        </div>
+                <h1>${it.displayName}</h1>
+                <h2>Test suite name: ${testSuite.getName()}</h2>
+                <canvas id="myChart" width="300" height="300"></canvas>
+	            <p>Number of tests: ${summary.getTotalTests()}</p>
+	            <p>Success: ${summary.getTotalSuccess()}</p>
+                <p>Failures: ${summary.getTotalFailed()}</p>
+                <p>Total time: ${summary.getTotalExecutionTime()}</p>
+            </div>
 	        <div class="tree">
+	            <h2>Test cases:</h2>
 	            <j:forEach var="testCase" items="${testSuite.getTestCases()}">
 		            <j:if test="${!testCase.isFailed()}">
 	            		<ul class="test-success">
@@ -57,33 +60,26 @@
             		</j:if>
 	        	</j:forEach>
             </div>
-            <canvas id="myChart" width="400" height="400"></canvas>
        		<script src="${resURL}/plugin/junitparser/js/Chart.js"></script>
        		<script>
-	       		var data = {
-	    			labels: ["January", "February", "March", "April", "May", "June", "July"],
-				    datasets: [
-				        {
-				            label: "My First dataset",
-				            fillColor: "rgba(220,220,220,0.5)",
-				            strokeColor: "rgba(220,220,220,0.8)",
-				            highlightFill: "rgba(220,220,220,0.75)",
-				            highlightStroke: "rgba(220,220,220,1)",
-				            data: [65, 59, 80, 81, 56, 55, 40]
-				        },
-				        {
-				            label: "My Second dataset",
-				            fillColor: "rgba(151,187,205,0.5)",
-				            strokeColor: "rgba(151,187,205,0.8)",
-				            highlightFill: "rgba(151,187,205,0.75)",
-				            highlightStroke: "rgba(151,187,205,1)",
-				            data: [28, 48, 40, 19, 86, 27, 90]
-				        }
-				    ]
-				};
-				var ctx = document.getElementById("myChart").getContext("2d");
-				var options = {barShowStroke: false}
-				var myBarChart = new Chart(ctx).Bar(data, options);
+				var data = [
+                    {
+                        value: ${summary.getTotalFailed()},
+                        color:"#F7464A",
+                        highlight: "#FF5A5E",
+                        label: "Test steps failed"
+                    },
+                    {
+                        value: ${summary.getTotalSuccess()},
+                        color: "#46BFBD",
+                        highlight: "#5AD3D1",
+                        label: "Test steps passed"
+                    }
+                ]
+
+                var ctx = document.getElementById("myChart").getContext("2d");
+                var options = {percentageInnerCutout: 30, segmentStrokeWidth : 5 }
+                var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
 			</script>
             <script src="${resURL}/plugin/junitparser/js/results-tree.js"></script>
         </l:main-panel>

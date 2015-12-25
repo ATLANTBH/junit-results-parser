@@ -11,6 +11,7 @@ import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
+import org.jenkinsci.plugins.junitparser.parser.Summary;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.w3c.dom.NodeList;
@@ -63,16 +64,19 @@ public class JUnitParser extends Recorder {
     }
 
     @Override
-    public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
+    public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) {
     	Parser parser = new Parser();
+        Summary summary = new Summary();
 		NodeList nodeList;
 		try {
             List<String> fileLocations = Arrays.asList(name.split(","));
             for (String fileLocation : fileLocations) {
                 nodeList = parser.getStartNode(fileLocation);
                 parser.parseJUnitResults(nodeList);
+                summary.addTestSuite(parser.getTestSuite());
             }
             parser.addTestCasesToTestSuite();
+            summary.calculateSummaryResults();
 			
 			// BAKIR: Added for purposes of getting these data to front-end. Once implemented, delete it!			
 			listener.getLogger().println("Test suite: " + parser.getTestSuite().getName());
@@ -92,7 +96,7 @@ public class JUnitParser extends Recorder {
 			}
 	    	
 	    	// Code added for implementing the buildAction screen
-	    	JUnitParserBuildAction buildAction = new JUnitParserBuildAction(parser.getTestSuite(), build);
+	    	JUnitParserBuildAction buildAction = new JUnitParserBuildAction(parser.getTestSuite(), summary, build);
 	    	build.addAction(buildAction);
 	    	
 		} catch (Exception e) {
