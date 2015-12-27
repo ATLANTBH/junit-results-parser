@@ -4,14 +4,17 @@
 			<link rel="stylesheet" href="${resURL}/plugin/junitparser/styles/style.css" type="text/css"/>
             <j:set var="testSuite" value="${it.getTestSuite()}"/>
             <j:set var="summary" value="${it.getSummary()}"/>
-            <div>
-                <h1>${it.displayName}</h1>
-                <h2>Test suite name: ${testSuite.getName()}</h2>
-                <canvas id="myChart" width="300" height="300"></canvas>
-	            <p>Number of tests: ${summary.getTotalTests()}</p>
-	            <p>Success: ${summary.getTotalSuccess()}</p>
-                <p>Failures: ${summary.getTotalFailed()}</p>
-                <p>Total time: ${summary.getTotalExecutionTime()}</p>
+            <div class='info-canvas-wrap'>
+                <div class='general-info'>
+                    <h1>${it.displayName}</h1>
+                    <h2>Test suite name: ${testSuite.getName()}</h2>
+                    <p>Number of tests: ${summary.getTotalTests()}</p>
+                    <p class='success-text'>Success: ${summary.getTotalSuccess()}</p>
+                    <p class='failure-text'>Failures: ${summary.getTotalFailed()}</p>
+                    <p>Success rate: ${(summary.getTotalSuccess()/summary.getTotalTests())*100}%</p>
+                    <p>Total time: ${summary.getTotalExecutionTime()}</p>
+                </div>
+                <canvas id="myChart" width="250" height="250"></canvas>
             </div>
 	        <div class="tree">
 	            <h2>Test cases:</h2>

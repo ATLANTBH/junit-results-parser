@@ -1,3 +1,7 @@
+.tree {
+    clear: both;
+}
+
 .tree ul {
     list-style: none outside none;
 }
@@ -70,15 +74,28 @@ a.test-failure-child {
 	color: #B22222;
 }
 
-li.success-text {
+.success-text {
 	color: #008000;
 }
 
-li.failure-text {
+.failure-text {
 	color: #B22222;
 }
 
 #wrapper {
     margin: 0 auto;
     width: 300px;
+}
+
+.wrap {
+    width: 100%;
+}
+
+.general-info {
+    float: left;
+}
+
+#myChart {
+    float: right;
+    margin-right: 150px;
 }
