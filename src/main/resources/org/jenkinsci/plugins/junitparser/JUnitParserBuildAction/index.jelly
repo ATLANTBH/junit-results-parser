@@ -15,6 +15,7 @@
                     <p>Total time: ${summary.getTotalExecutionTime()}</p>
                 </div>
                 <canvas id="myChart" width="250" height="250"></canvas>
+                <div id="legend"></div>
             </div>
 	        <div class="tree">
 	            <h2>Test cases:</h2>
@@ -63,26 +64,28 @@
             		</j:if>
 	        	</j:forEach>
             </div>
-       		<script src="${resURL}/plugin/junitparser/js/Chart.js"></script>
+       		<script src="${resURL}/plugin/junitparser/js/Chart.min.js"></script>
        		<script>
 				var data = [
                     {
                         value: ${summary.getTotalFailed()},
-                        color:"#F7464A",
-                        highlight: "#FF5A5E",
+                        color: "#d81f02",
+                        highlight: "#ec2303",
                         label: "Test steps failed"
                     },
                     {
                         value: ${summary.getTotalSuccess()},
-                        color: "#46BFBD",
-                        highlight: "#5AD3D1",
+                        color: "#53a233",
+                        highlight: "#69c941",
                         label: "Test steps passed"
                     }
                 ]
 
                 var ctx = document.getElementById("myChart").getContext("2d");
-                var options = {percentageInnerCutout: 30, segmentStrokeWidth : 5 }
+                var options = {percentageInnerCutout: 30, segmentStrokeWidth: 5}
                 var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
+                var legend = myDoughnutChart.generateLegend();
+                document.getElementById("legend").innerHTML = legend;
 			</script>
             <script src="${resURL}/plugin/junitparser/js/results-tree.js"></script>
         </l:main-panel>

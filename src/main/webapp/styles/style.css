@@ -99,3 +99,19 @@ a.test-failure-child {
     float: right;
     margin-right: 150px;
 }
+
+#legend {
+    float: right;
+}
+
+.doughnut-legend li span {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.doughnut-legend {
+    list-style: none;
+    margin-top: 30px;
+}
