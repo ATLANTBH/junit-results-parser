@@ -1,6 +1,8 @@
 package org.jenkinsci.plugins.junitparser.parser;
 
 import org.jenkinsci.plugins.junitparser.model.TestSuite;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -46,5 +48,9 @@ public class Summary {
             totalExecutionTime = totalExecutionTime + Double.parseDouble(testSuite.getTime());
         }
         totalSuccess = totalTests - totalFailed;
+    }
+
+    public Double getSuccessRate() {
+        return Double.parseDouble(new DecimalFormat("###.##").format((getTotalSuccess()/(double)getTotalTests())*100));
     }
 }
