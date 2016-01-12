@@ -23,7 +23,7 @@ public class TestCase {
         for (Map.Entry<String, String> entry : testStep.getAssertionFailuresList().entrySet()) {
             if (entry.getKey() != null) {
                 if (!entry.getKey().isEmpty()) {
-                    failed = true;
+                    this.failed = true;
                 }
             }
         }

@@ -77,23 +77,6 @@ public class JUnitParser extends Recorder {
             }
             parser.addTestCasesToTestSuite();
             summary.calculateSummaryResults();
-			
-			// BAKIR: Added for purposes of getting these data to front-end. Once implemented, delete it!			
-			listener.getLogger().println("Test suite: " + parser.getTestSuite().getName());
-			listener.getLogger().println("---------");
-
-			for (TestCase testCase : parser.getTestSuite().getTestCases()) {
-				listener.getLogger().println("Test case: " + testCase.getClassName());
-				listener.getLogger().println("Test case failed: " + testCase.isFailed());
-			    for (TestStep testStep : testCase.getTestSteps()) {
-                    listener.getLogger().println("Test step: " + testStep.getName() + "..." + testStep.getTime());
-                    for (Map.Entry<String, String> entry : testStep.getAssertionFailuresList().entrySet()) {
-                        listener.getLogger().println("Message: " + entry.getKey());
-                        listener.getLogger().println("Value: " + entry.getValue());
-                    }
-			    }
-			    listener.getLogger().println("---------");
-			}
 	    	
 	    	// Code added for implementing the buildAction screen
 	    	JUnitParserBuildAction buildAction = new JUnitParserBuildAction(parser.getTestSuite(), summary, build);
