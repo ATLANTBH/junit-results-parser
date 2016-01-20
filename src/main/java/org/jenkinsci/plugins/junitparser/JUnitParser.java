@@ -23,11 +23,8 @@ import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.List;
 
-import org.jenkinsci.plugins.junitparser.model.TestCase;
-import org.jenkinsci.plugins.junitparser.model.TestStep;
 import org.jenkinsci.plugins.junitparser.parser.Parser;
 
 /**
@@ -181,4 +178,3 @@ public class JUnitParser extends Recorder {
 		return BuildStepMonitor.NONE;
 	}
 }
-
