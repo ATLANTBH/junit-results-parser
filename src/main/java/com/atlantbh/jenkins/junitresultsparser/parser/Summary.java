@@ -1,6 +1,6 @@
-package org.jenkinsci.plugins.junitparser.parser;
+package com.atlantbh.jenkins.junitresultsparser.parser;
 
-import org.jenkinsci.plugins.junitparser.model.TestSuite;
+import com.atlantbh.jenkins.junitresultsparser.model.TestSuite;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.junitparser.model;
+package com.atlantbh.jenkins.junitresultsparser.model;
 
 import java.util.ArrayList;
 
@@ -6,29 +6,29 @@ import java.util.ArrayList;
  * This class serves as container of test cases and gives additional info on test suite level
  */
 public class TestSuite {
-	
+
 	private String name;
 	private String tests;
 	private String failures;
 	private String time;
 	private ArrayList<TestCase> testCases = new ArrayList<TestCase>();
-	
+
 	public TestSuite() {
 		super();
 	}
-	
+
 	public ArrayList<TestCase> getTestCases() {
 		return testCases;
 	}
-	
+
 	public void addTestCase(TestCase testCase) {
 		this.testCases.add(testCase);
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}

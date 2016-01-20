@@ -8,13 +8,13 @@
     <artifactId>plugin</artifactId>
     <version>1.580.1</version>
   </parent>
-  
-  <groupId>org.jenkinsci.plugins</groupId>
-  <artifactId>junitparser</artifactId>
+
+  <groupId>com.atlantbh.jenkins</groupId>
+  <artifactId>junit-results-parser</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>hpi</packaging>
 
-  <name>JUnit Parser Plugin</name>
+  <name>JUnit Results Parser Plugin</name>
   <description>Parsing JUnit results and rendering them in a tree view</description>
   <licenses>
     <license>

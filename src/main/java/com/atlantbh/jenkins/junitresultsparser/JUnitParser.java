@@ -1,4 +1,6 @@
-package org.jenkinsci.plugins.junitparser;
+package com.atlantbh.jenkins.junitresultsparser;
+import com.atlantbh.jenkins.junitresultsparser.parser.Parser;
+import com.atlantbh.jenkins.junitresultsparser.parser.Summary;
 import hudson.Launcher;
 import hudson.Extension;
 import hudson.util.FormValidation;
@@ -11,7 +13,6 @@ import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
-import org.jenkinsci.plugins.junitparser.parser.Summary;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.w3c.dom.NodeList;
@@ -25,8 +26,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jenkinsci.plugins.junitparser.parser.Parser;
-
 /**
  * Sample {@link Builder}.
  *
@@ -39,7 +38,7 @@ import org.jenkinsci.plugins.junitparser.parser.Parser;
  * to remember the configuration.
  *
  * <p>
- * When a build is performed, the {@link #perform} method will be invoked. 
+ * When a build is performed, the {@link #perform} method will be invoked.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -74,18 +73,18 @@ public class JUnitParser extends Recorder {
             }
             parser.addTestCasesToTestSuite();
             summary.calculateSummaryResults();
-	    	
+
 	    	// Code added for implementing the buildAction screen
 	    	JUnitParserBuildAction buildAction = new JUnitParserBuildAction(parser.getTestSuite(), summary, build);
 	    	build.addAction(buildAction);
-	    	
+
 		} catch (Exception e) {
 			listener.getLogger().println(e.getMessage());
 			listener.getLogger().println(e.getStackTrace());
 		}
 		return true;
     }
-    
+
     // Overridden for better type safety.
     // If your plugin doesn't really define any property on Descriptor,
     // you don't have to do this.
@@ -100,7 +99,7 @@ public class JUnitParser extends Recorder {
      * The class is marked as public so that it can be accessed from views.
      *
      * <p>
-     * See <tt>src/main/resources/hudson/plugins/hello_world/HelloWorldBuilder/*.jelly</tt>
+     * See <tt>src/main/resources/hudson/jenkins/hello_world/HelloWorldBuilder/*.jelly</tt>
      * for the actual HTML fragment for the configuration screen.
      */
     @Extension // This indicates to Jenkins that this is an implementation of an extension point.
@@ -114,7 +113,7 @@ public class JUnitParser extends Recorder {
          */
 
         /**
-         * In order to load the persisted global configuration, you have to 
+         * In order to load the persisted global configuration, you have to
          * call load() in the constructor.
          */
         public DescriptorImpl() {
@@ -131,7 +130,7 @@ public class JUnitParser extends Recorder {
          *      <p>
          *      Note that returning {@link FormValidation#error(String)} does not
          *      prevent the form from being saved. It just means that a message
-         *      will be displayed to the user. 
+         *      will be displayed to the user.
          */
         public FormValidation doCheckName(@QueryParameter String value)
                 throws IOException, ServletException {
@@ -150,7 +149,7 @@ public class JUnitParser extends Recorder {
         }
 
         public boolean isApplicable(Class<? extends AbstractProject> aClass) {
-            // Indicates that this builder can be used with all kinds of project types 
+            // Indicates that this builder can be used with all kinds of project types
             return true;
         }
 
