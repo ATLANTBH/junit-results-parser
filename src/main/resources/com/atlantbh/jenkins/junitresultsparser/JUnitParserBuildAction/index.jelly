@@ -1,7 +1,7 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
     <l:layout>	
         <l:main-panel>
-			<link rel="stylesheet" href="${resURL}/plugin/junitparser/styles/style.css" type="text/css"/>
+			<link rel="stylesheet" href="${resURL}/plugin/junit-results-parser/styles/style.css" type="text/css"/>
             <j:set var="testSuite" value="${it.getTestSuite()}"/>
             <j:set var="summary" value="${it.getSummary()}"/>
             <div class='info-canvas-wrap'>
@@ -64,7 +64,7 @@
             		</j:if>
 	        	</j:forEach>
             </div>
-       		<script src="${resURL}/plugin/junitparser/js/Chart.min.js"></script>
+       		<script src="${resURL}/plugin/junit-results-parser/js/Chart.min.js"></script>
        		<script>
 				var data = [
                     {
@@ -87,7 +87,7 @@
                 var legend = myDoughnutChart.generateLegend();
                 document.getElementById("legend").innerHTML = legend;
 			</script>
-            <script src="${resURL}/plugin/junitparser/js/results-tree.js"></script>
+            <script src="${resURL}/plugin/junit-results-parser/js/results-tree.js"></script>
         </l:main-panel>
     </l:layout>    
 </j:jelly>
