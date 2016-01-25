@@ -37,7 +37,6 @@ Installation Instructions
 
 Licensing and legal issues
 -----------------------
-Copyright 2016 AtlantBH
-[http://opensource.org/licenses/MIT MIT License]
+Copyright 2016 AtlantBH, [MIT License] (http://opensource.org/licenses/MIT)
   
   
