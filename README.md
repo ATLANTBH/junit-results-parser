@@ -5,6 +5,7 @@ What is it?
 ----------------------
 
 A Jenkins post-build plugin used for visual representation of JUnit test results adapted for functional testing.
+Test results follow test suite/test case/test step pattern which is easier to follow when writing functional tests. For example: Test suite is smoke test, test case is the name of the smoke test and test steps is the list of steps that will be performed in this test case. One test suite has one or many test cases while one test case has one or many test steps. Conversion from JUnit format to suite/case/step pattern is done automatically in this plugin and then visualized in plugins output in post-build.
 
 
 Requirements
