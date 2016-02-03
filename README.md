@@ -21,7 +21,7 @@ Main engine for this plugin its conversion of standard Unit test scheme into sui
 
 Everything should be clearer when looking at this mapping picture:
 
-![alt tag](examples/mapping.png)
+<img src="examples/mapping.png" width="550">
 
 Requirements
 -----------------------
