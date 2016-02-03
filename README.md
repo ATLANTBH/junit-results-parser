@@ -56,7 +56,7 @@ Usage Instructions
 
 - In summary, this is how it all looks:
 
-
+![alt tag](examples/junit-results-parser.png)
 
 Licensing and legal issues
 -----------------------
