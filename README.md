@@ -19,6 +19,10 @@ Main engine for this plugin its conversion of standard Unit test scheme into sui
 - All testcase elements which have same classname attribute are one Test Case (classname attribute is test case name)
 - All testcase elements which have same classname (part of same Test Case) are Test Steps. name attribute is test step description. If failure happens, failure attribute represents failure for that specific Test Step. One Test Step can have multiple failures depending on how many assertions failed.
 
+Everything should be clearer when looking at this mapping picture:
+
+![alt tag](examples/mapping.png)
+
 Requirements
 -----------------------
 
@@ -65,7 +69,7 @@ Usage Instructions
 
 - You can click on each test step and it will open its details. Success test step is green and it will open execution time for that step while failed test step is red and it will open execution time and list of assertions that failed for that particular test step
 
-- In summary, this is how it all looks:
+In summary, this is how it all looks:
 
 ![alt tag](examples/results.png)
 
