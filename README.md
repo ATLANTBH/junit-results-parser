@@ -7,6 +7,17 @@ What is it?
 A Jenkins post-build plugin used for visual representation of JUnit test results adapted for functional testing.
 Test results follow test suite/test case/test step pattern which is easy to understand when writing functional tests. For example: Test suite is smoke test, test case is the name of the smoke test and test steps is the list of steps that will be performed in this test case. One test suite has one or many test cases while one test case has one or many test steps. Conversion from JUnit format to suite/case/step pattern is done automatically in this plugin and then visualized in plugins output in post-build.
 
+What it is not?
+----------------------
+It is not a viewer of standard Unit tests and is primarily focused on visual representation of functional tests that are written using any framework that supports JUnit (like Selenium, TestNG, Appium...etc.) format.
+
+How it works?
+----------------------
+Main engine for this plugin its conversion of standard Unit test scheme into suite/case/step pattern explained above. From the Unit test scheme perspective, following happens:
+
+- Attribute name from testsuite element is mapped to Test Suite Name, along with other useful info like: number of tests, execution time
+- All testcase elements which have same classname attribute are one Test Case (classname attribute is test case name)
+- All testcase elements which have same classname (part of same Test Case) are Test Steps. name attribute is test step description. If failure happens, failure attribute represents failure for that specific Test Step. One Test Step can have multiple failures depending on how many assertions failed.
 
 Requirements
 -----------------------
@@ -57,6 +68,10 @@ Usage Instructions
 - In summary, this is how it all looks:
 
 ![alt tag](examples/results.png)
+
+Good to know
+----------------------
+It is very imporant to keep your tests as descriptive as possible. This applies to all situations but in case of using our plugin, it makes sense even more. The more descriptive you are when writing functional tests through JUnit framework, the more benefit you will see in this results reporter plugin. 
 
 Licensing and legal issues
 -----------------------
