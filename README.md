@@ -13,11 +13,11 @@ It is not a viewer of standard Unit tests and is primarily focused on visual rep
 
 How it works?
 ----------------------
-Main engine for this plugin its conversion of standard Unit test scheme into suite/case/step pattern explained above. From the Unit test scheme perspective, following happens:
+Main engine for this plugin is its conversion of standard Unit test scheme into suite/case/step pattern explained above. From the Unit test scheme perspective, following happens:
 
 - Attribute name from testsuite element is mapped to Test Suite Name, along with other useful info like: number of tests, execution time
 - All testcase elements which have same classname attribute are one Test Case (classname attribute is test case name)
-- All testcase elements which have same classname (part of same Test Case) are Test Steps. name attribute is test step description. If failure happens, failure attribute represents failure for that specific Test Step. One Test Step can have multiple failures depending on how many assertions failed.
+- All testcase elements which have same classname (part of same Test Case) are Test Steps. Name attribute is test step description. If failure happens, failure attribute represents failure for that specific Test Step. One Test Step can have multiple failures depending on how many assertions failed.
 
 Everything should be clearer when looking at this mapping picture:
 
