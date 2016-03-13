@@ -25,7 +25,7 @@
 	            		<ul class="test-success">
 		            		<li><a>${testCase.getClassName()}</a>
 		            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
-                                    <j:if test="${!testStep.getSkipped()}">
+                                    <j:if test="${!testStep.isSkipped()}">
                                         <ul>
                                             <li><a class="test-success-child">Test step: ${testStep.getName()}</a>
                                                 <ul>
@@ -34,7 +34,7 @@
                                             </li>
                                         </ul>
                                     </j:if>
-                                    <j:if test="${testStep.getSkipped()}">
+                                    <j:if test="${testStep.isSkipped()}">
                                         <ul>
                                             <li><a class="test-skipped-child">Test step: ${testStep.getName()}</a>
                                                 <ul>
@@ -53,14 +53,14 @@
     	            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
     				            	<ul>
     				            		<j:if test="${testStep.getAssertionFailuresList().isEmpty()}">
-    						            	<j:if test="${!testStep.getSkipped()}">
+    						            	<j:if test="${!testStep.isSkipped()}">
                                                 <li><a class="test-success-child">Test step: ${testStep.getName()}</a>
                                                     <ul>
                                                         <li class="success-text">Time: ${testStep.getTime()}</li>
                                                     </ul>
                                                 </li>
                                             </j:if>
-                                            <j:if test="${testStep.getSkipped()}">
+                                            <j:if test="${testStep.isSkipped()}">
                                                 <li><a class="test-skipped-child">Test step: ${testStep.getName()}</a>
                                                     <ul>
                                                         <li class="skipped-text">Time: ${testStep.getTime()}</li>

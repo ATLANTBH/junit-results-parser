@@ -11,7 +11,7 @@ public class TestStep {
 	private String name;
 	private String time;
     private Map<String, String> assertionFailuresList = new HashMap<String, String>();
-	private Boolean isSkipped = false;
+	private Boolean skipped = false;
 
 	public TestStep() {
 		super();
@@ -41,7 +41,7 @@ public class TestStep {
         this.assertionFailuresList.put(message, value);
     }
 
-	public Boolean getSkipped() { return isSkipped; }
+	public Boolean isSkipped() { return skipped; }
 
-	public void setSkipped(Boolean skipped) { isSkipped = skipped; }
+	public void setSkipped(Boolean skipped) { this.skipped = skipped; }
 }
