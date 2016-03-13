@@ -13,6 +13,7 @@ public class Summary {
 
     private int totalSuccess;
     private int totalFailed;
+    private int totalSkipped;
     private int totalTests;
     private double totalExecutionTime;
     private ArrayList<TestSuite> testSuites = new ArrayList<TestSuite>();
@@ -28,6 +29,8 @@ public class Summary {
     public int getTotalFailed() {
         return totalFailed;
     }
+
+    public int getTotalSkipped() { return totalSkipped; }
 
     public int getTotalTests() {
         return totalTests;
@@ -45,9 +48,10 @@ public class Summary {
         for (TestSuite testSuite : this.testSuites) {
             totalTests = totalTests + Integer.parseInt(testSuite.getTests());
             totalFailed = totalFailed + Integer.parseInt(testSuite.getFailures());
+            totalSkipped = totalSkipped + Integer.parseInt(testSuite.getSkipped());
             totalExecutionTime = totalExecutionTime + Double.parseDouble(testSuite.getTime());
         }
-        totalSuccess = totalTests - totalFailed;
+        totalSuccess = totalTests - totalFailed - totalSkipped;
     }
 
     public Double getSuccessRate() {

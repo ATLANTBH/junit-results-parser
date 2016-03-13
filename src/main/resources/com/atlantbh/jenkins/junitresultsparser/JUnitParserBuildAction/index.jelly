@@ -11,6 +11,7 @@
                     <p>Number of tests: ${summary.getTotalTests()}</p>
                     <p class='success-text'>Success: ${summary.getTotalSuccess()}</p>
                     <p class='failure-text'>Failures: ${summary.getTotalFailed()}</p>
+                    <p class='skipped-text'>Skipped: ${summary.getTotalSkipped()}</p>
                     <p>Success rate: ${summary.getSuccessRate()}%</p>
                     <p>Total time: ${summary.getTotalExecutionTime()}</p>
                 </div>
@@ -24,13 +25,24 @@
 	            		<ul class="test-success">
 		            		<li><a>${testCase.getClassName()}</a>
 		            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
-					            	<ul>
-						            	<li><a class="test-success-child">Test step: ${testStep.getName()}</a>
-						            		<ul>
-					            				<li class="success-text">Time: ${testStep.getTime()}</li>
-					            			</ul>
-					            		</li>
-					            	</ul>
+                                    <j:if test="${!testStep.getSkipped()}">
+                                        <ul>
+                                            <li><a class="test-success-child">Test step: ${testStep.getName()}</a>
+                                                <ul>
+                                                    <li class="success-text">Time: ${testStep.getTime()}</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </j:if>
+                                    <j:if test="${testStep.getSkipped()}">
+                                        <ul>
+                                            <li><a class="test-skipped-child">Test step: ${testStep.getName()}</a>
+                                                <ul>
+                                                    <li class="skipped-text">Time: ${testStep.getTime()}</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </j:if>
 				            	</j:forEach>
 			            	</li>
 			            </ul>
@@ -38,29 +50,38 @@
 	            	<j:if test="${testCase.isFailed()}">
 	            		<ul class="test-failure">
 	            			<li><a>${testCase.getClassName()}</a>
-	            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
-				            	<ul>
-				            		<j:if test="${testStep.getAssertionFailuresList().isEmpty()}">
-						            	<li><a class="test-success-child">Test step: ${testStep.getName()}</a>
-						            		<ul>
-					            				<li class="success-text">Time: ${testStep.getTime()}</li>
-					            			</ul>
-					            		</li>
-				            		</j:if>
-				            		<j:if test="${!testStep.getAssertionFailuresList().isEmpty()}">
-				            			<li><a class="test-failure-child">Test step: ${testStep.getName()}</a>
-						            		<ul>
-						            			<j:forEach var="testFailure" items="${testStep.getAssertionFailuresList()}">
-						            				<li class="failure-text">${testFailure.getKey()}: ${testFailure.getValue()}</li>
-						            			</j:forEach>
-					            				<li class="failure-text">Time: ${testStep.getTime()}</li>
-					            			</ul>
-					            		</li>
-				            		</j:if>
-				            	</ul>
-			            	</j:forEach>
-		            	</li>
-		            </ul>
+    	            			<j:forEach var="testStep" items="${testCase.getTestSteps()}">
+    				            	<ul>
+    				            		<j:if test="${testStep.getAssertionFailuresList().isEmpty()}">
+    						            	<j:if test="${!testStep.getSkipped()}">
+                                                <li><a class="test-success-child">Test step: ${testStep.getName()}</a>
+                                                    <ul>
+                                                        <li class="success-text">Time: ${testStep.getTime()}</li>
+                                                    </ul>
+                                                </li>
+                                            </j:if>
+                                            <j:if test="${testStep.getSkipped()}">
+                                                <li><a class="test-skipped-child">Test step: ${testStep.getName()}</a>
+                                                    <ul>
+                                                        <li class="skipped-text">Time: ${testStep.getTime()}</li>
+                                                    </ul>
+                                                </li>
+                                            </j:if>
+    				            		</j:if>
+    				            		<j:if test="${!testStep.getAssertionFailuresList().isEmpty()}">
+    				            			<li><a class="test-failure-child">Test step: ${testStep.getName()}</a>
+    						            		<ul>
+    						            			<j:forEach var="testFailure" items="${testStep.getAssertionFailuresList()}">
+    						            				<li class="failure-text">${testFailure.getKey()}: ${testFailure.getValue()}</li>
+    						            			</j:forEach>
+    					            				<li class="failure-text">Time: ${testStep.getTime()}</li>
+    					            			</ul>
+    					            		</li>
+    				            		</j:if>
+    				            	</ul>
+    			            	</j:forEach>
+    		            	</li>
+    		            </ul>
             		</j:if>
 	        	</j:forEach>
             </div>
@@ -78,6 +99,12 @@
                         color: "#53a233",
                         highlight: "#69c941",
                         label: "Test steps passed"
+                    },
+                    {
+                        value: ${summary.getTotalSkipped()},
+                        color: "#ff9900",
+                        highlight: "#ffad33",
+                        label: "Test steps skipped"
                     }
                 ]
 

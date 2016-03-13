@@ -65,9 +65,16 @@ public class Parser {
 		NodeList childNodeList = element.getChildNodes();
 	    for (int j = 0; j < childNodeList.getLength(); j++) {
 	    	Node childNode = childNodeList.item(j);
+
+			if (childNode.getNodeName().equals("skipped")) {
+				testStep.setSkipped(true);
+				return testStep;
+			}
+
 	    	if (childNode.getNodeType() == Node.ELEMENT_NODE) {
 	    		Element childElement = (Element) childNode;
-	    		if (childNode.getNodeName() == "failure") {
+
+	    		if (childNode.getNodeName().equals("failure")) {
                     testStep.setAssertionFailures(childElement.getAttribute("message"), childElement.getTextContent());
 	    		}
 	    	}
@@ -83,14 +90,19 @@ public class Parser {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 
 				Element element = (Element) node;
-				if (node.getNodeName() == "testsuite") {
+				if (node.getNodeName().equals("testsuite")) {
 					this.testSuite.setName(element.getAttribute("name"));
 					this.testSuite.setTests(element.getAttribute("tests"));
 					this.testSuite.setFailures(element.getAttribute("failures"));
 					this.testSuite.setTime(element.getAttribute("time"));
+
+					if(!element.getAttribute("skipped").equals(""))
+						this.testSuite.setSkipped(element.getAttribute("skipped"));
+					else
+						this.testSuite.setSkipped("0");
 				}
 
-				if (node.getNodeName() == "testcase") {
+				if (node.getNodeName().equals("testcase")) {
 					TestCase testCase = new TestCase();
 					testCase.setClassName(element.getAttribute("classname"));
 					TestStep testStep = new TestStep();

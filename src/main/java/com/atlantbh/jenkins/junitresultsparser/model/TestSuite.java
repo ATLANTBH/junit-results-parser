@@ -10,6 +10,7 @@ public class TestSuite {
 	private String name;
 	private String tests;
 	private String failures;
+	private String skipped;
 	private String time;
 	private ArrayList<TestCase> testCases = new ArrayList<TestCase>();
 
@@ -48,6 +49,10 @@ public class TestSuite {
 	public void setFailures(String failures) {
 		this.failures = failures;
 	}
+
+	public String getSkipped() { return skipped; }
+
+	public void setSkipped(String skipped) { this.skipped = skipped; }
 
 	public String getTime() {
 		return time;
