@@ -74,12 +74,22 @@ a.test-failure-child {
 	color: #B22222;
 }
 
+a.test-skipped-child {
+    background-image: url("../images/rsz_skipped.png");
+    background-repeat: no-repeat;
+    color: #ff9900;
+}
+
 .success-text {
 	color: #008000;
 }
 
 .failure-text {
 	color: #B22222;
+}
+
+.skipped-text {
+    color: #ff9900;
 }
 
 #wrapper {

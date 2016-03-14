@@ -1,4 +1,5 @@
 package com.atlantbh.jenkins.junitresultsparser;
+
 import com.atlantbh.jenkins.junitresultsparser.parser.Parser;
 import com.atlantbh.jenkins.junitresultsparser.parser.Summary;
 import hudson.Launcher;
@@ -28,7 +29,7 @@ import java.util.List;
 
 /**
  * Sample {@link Builder}.
- *
+ * <p>
  * <p>
  * When the user configures the project and enables this builder,
  * {@link DescriptorImpl#newInstance(StaplerRequest)} is invoked
@@ -36,7 +37,7 @@ import java.util.List;
  * instance is persisted to the project configuration XML by using
  * XStream, so this allows you to use instance fields (like {@link #name})
  * to remember the configuration.
- *
+ * <p>
  * <p>
  * When a build is performed, the {@link #perform} method will be invoked.
  *
@@ -60,11 +61,11 @@ public class JUnitParser extends Recorder {
     }
 
     @Override
-    public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) {
-    	Parser parser = new Parser();
+    public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) {
+        Parser parser = new Parser();
         Summary summary = new Summary();
-		NodeList nodeList;
-		try {
+        NodeList nodeList;
+        try {
             List<String> fileLocations = Arrays.asList(name.split(","));
             for (String fileLocation : fileLocations) {
                 nodeList = parser.getStartNode(fileLocation);
@@ -74,15 +75,15 @@ public class JUnitParser extends Recorder {
             parser.addTestCasesToTestSuite();
             summary.calculateSummaryResults();
 
-	    	// Code added for implementing the buildAction screen
-	    	JUnitParserBuildAction buildAction = new JUnitParserBuildAction(parser.getTestSuite(), summary, build);
-	    	build.addAction(buildAction);
+            // Code added for implementing the buildAction screen
+            JUnitParserBuildAction buildAction = new JUnitParserBuildAction(parser.getTestSuite(), summary, build);
+            build.addAction(buildAction);
 
-		} catch (Exception e) {
-			listener.getLogger().println(e.getMessage());
-			listener.getLogger().println(e.getStackTrace());
-		}
-		return true;
+        } catch (Exception e) {
+            listener.getLogger().println(e.getMessage());
+            listener.getLogger().println(e.getStackTrace());
+        }
+        return true;
     }
 
     // Overridden for better type safety.
@@ -97,7 +98,7 @@ public class JUnitParser extends Recorder {
     /**
      * Descriptor for {@link JUnitParser}. Used as a singleton.
      * The class is marked as public so that it can be accessed from views.
-     *
+     * <p>
      * <p>
      * See <tt>src/main/resources/hudson/jenkins/hello_world/HelloWorldBuilder/*.jelly</tt>
      * for the actual HTML fragment for the configuration screen.
@@ -123,14 +124,12 @@ public class JUnitParser extends Recorder {
         /**
          * Performs on-the-fly validation of the form field 'name'.
          *
-         * @param value
-         *      This parameter receives the value that the user has typed.
-         * @return
-         *      Indicates the outcome of the validation. This is sent to the browser.
-         *      <p>
-         *      Note that returning {@link FormValidation#error(String)} does not
-         *      prevent the form from being saved. It just means that a message
-         *      will be displayed to the user.
+         * @param value This parameter receives the value that the user has typed.
+         * @return Indicates the outcome of the validation. This is sent to the browser.
+         * <p>
+         * Note that returning {@link FormValidation#error(String)} does not
+         * prevent the form from being saved. It just means that a message
+         * will be displayed to the user.
          */
         public FormValidation doCheckName(@QueryParameter String value)
                 throws IOException, ServletException {
@@ -141,7 +140,7 @@ public class JUnitParser extends Recorder {
                 for (String file : filesList) {
                     File inputFile = new File(file);
                     if (!inputFile.isFile()) {
-                      return FormValidation.error("Please set correct file location");
+                        return FormValidation.error("Please set correct file location");
                     }
                 }
             }
@@ -167,13 +166,13 @@ public class JUnitParser extends Recorder {
             // ^Can also use req.bindJSON(this, formData);
             //  (easier when there are many fields; need set* methods for this, like setUseFrench)
             save();
-            return super.configure(req,formData);
+            return super.configure(req, formData);
         }
     }
 
-	@Override
-	public BuildStepMonitor getRequiredMonitorService() {
-		// TODO Auto-generated method stub
-		return BuildStepMonitor.NONE;
-	}
+    @Override
+    public BuildStepMonitor getRequiredMonitorService() {
+        // TODO Auto-generated method stub
+        return BuildStepMonitor.NONE;
+    }
 }
