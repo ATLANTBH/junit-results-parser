@@ -7,11 +7,11 @@ import hudson.model.AbstractBuild;
 import hudson.model.Action;
 
 public class JUnitParserBuildAction implements Action {
-	private AbstractBuild<?, ?> build;
-	private TestSuite testSuite;
+    private AbstractBuild<?, ?> build;
+    private TestSuite testSuite;
     private Summary summary;
 
-	@Override
+    @Override
     public String getIconFileName() {
         return "clipboard.png";
     }
@@ -27,17 +27,18 @@ public class JUnitParserBuildAction implements Action {
     }
 
     public TestSuite getTestSuite() {
-    	return testSuite;
+        return testSuite;
     }
 
-    public Summary getSummary() { return summary; }
+    public Summary getSummary() {
+        return summary;
+    }
 
     public int getBuildNumber() {
         return this.build.number;
     }
 
-    JUnitParserBuildAction(final TestSuite testSuite, final Summary summary, final AbstractBuild<?, ?> build)
-    {
+    JUnitParserBuildAction(final TestSuite testSuite, final Summary summary, final AbstractBuild<?, ?> build) {
         this.testSuite = testSuite;
         this.summary = summary;
         this.build = build;

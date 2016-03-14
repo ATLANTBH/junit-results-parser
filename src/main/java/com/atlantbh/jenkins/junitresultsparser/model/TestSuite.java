@@ -7,58 +7,62 @@ import java.util.ArrayList;
  */
 public class TestSuite {
 
-	private String name;
-	private String tests;
-	private String failures;
-	private String skipped;
-	private String time;
-	private ArrayList<TestCase> testCases = new ArrayList<TestCase>();
+    private String name;
+    private Integer tests;
+    private Integer failures;
+    private Integer skipped;
+    private Double time;
+    private ArrayList<TestCase> testCases = new ArrayList<TestCase>();
 
-	public TestSuite() {
-		super();
-	}
+    public TestSuite() {
+        super();
+    }
 
-	public ArrayList<TestCase> getTestCases() {
-		return testCases;
-	}
+    public ArrayList<TestCase> getTestCases() {
+        return testCases;
+    }
 
-	public void addTestCase(TestCase testCase) {
-		this.testCases.add(testCase);
-	}
+    public void addTestCase(TestCase testCase) {
+        this.testCases.add(testCase);
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getTests() {
-		return tests;
-	}
+    public Integer getTests() {
+        return tests;
+    }
 
-	public void setTests(String tests) {
-		this.tests = tests;
-	}
+    public void setTests(Integer tests) {
+        this.tests = tests;
+    }
 
-	public String getFailures() {
-		return failures;
-	}
+    public Integer getFailures() {
+        return failures;
+    }
 
-	public void setFailures(String failures) {
-		this.failures = failures;
-	}
+    public void setFailures(Integer failures) {
+        this.failures = failures;
+    }
 
-	public String getSkipped() { return skipped; }
+    public Integer getSkipped() {
+        return skipped;
+    }
 
-	public void setSkipped(String skipped) { this.skipped = skipped; }
+    public void setSkipped(Integer skipped) {
+        this.skipped = skipped;
+    }
 
-	public String getTime() {
-		return time;
-	}
+    public Double getTime() {
+        return time;
+    }
 
-	public void setTime(String time) {
-		this.time = time;
-	}
+    public void setTime(Double time) {
+        this.time = time;
+    }
 }

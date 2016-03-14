@@ -30,7 +30,9 @@ public class Summary {
         return totalFailed;
     }
 
-    public int getTotalSkipped() { return totalSkipped; }
+    public int getTotalSkipped() {
+        return totalSkipped;
+    }
 
     public int getTotalTests() {
         return totalTests;
@@ -46,15 +48,15 @@ public class Summary {
 
     public void calculateSummaryResults() {
         for (TestSuite testSuite : this.testSuites) {
-            totalTests = totalTests + Integer.parseInt(testSuite.getTests());
-            totalFailed = totalFailed + Integer.parseInt(testSuite.getFailures());
-            totalSkipped = totalSkipped + Integer.parseInt(testSuite.getSkipped());
-            totalExecutionTime = totalExecutionTime + Double.parseDouble(testSuite.getTime());
+            totalTests = totalTests + testSuite.getTests();
+            totalFailed = totalFailed + testSuite.getFailures();
+            totalSkipped = totalSkipped + testSuite.getSkipped();
+            totalExecutionTime = totalExecutionTime + testSuite.getTime();
         }
         totalSuccess = totalTests - totalFailed - totalSkipped;
     }
 
     public Double getSuccessRate() {
-        return Double.parseDouble(new DecimalFormat("###.##").format((getTotalSuccess()/(double)getTotalTests())*100));
+        return Double.parseDouble(new DecimalFormat("###.##").format((getTotalSuccess() / (double) getTotalTests()) * 100));
     }
 }

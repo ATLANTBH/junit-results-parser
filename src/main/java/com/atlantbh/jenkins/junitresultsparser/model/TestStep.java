@@ -8,30 +8,30 @@ import java.util.Map;
  */
 public class TestStep {
 
-	private String name;
-	private String time;
+    private String name;
+    private String time;
     private Map<String, String> assertionFailuresList = new HashMap<String, String>();
-	private Boolean skipped = false;
+    private Boolean skipped = false;
 
-	public TestStep() {
-		super();
-	}
+    public TestStep() {
+        super();
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getTime() {
-		return time;
-	}
+    public String getTime() {
+        return time;
+    }
 
-	public void setTime(String time) {
-		this.time = time;
-	}
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public Map<String, String> getAssertionFailuresList() {
         return assertionFailuresList;
@@ -41,7 +41,11 @@ public class TestStep {
         this.assertionFailuresList.put(message, value);
     }
 
-	public Boolean isSkipped() { return skipped; }
+    public Boolean isSkipped() {
+        return skipped;
+    }
 
-	public void setSkipped(Boolean skipped) { this.skipped = skipped; }
+    public void setSkipped(Boolean skipped) {
+        this.skipped = skipped;
+    }
 }
