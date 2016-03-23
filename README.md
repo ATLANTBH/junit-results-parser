@@ -65,13 +65,13 @@ Usage Instructions
 
 - When running your job next time, you will have "JUnitParser Results page" link on the left side in your job build execution. Click on that link and you will get visualized representation of your test results
 
-- Visual representation of tests results consists of: Test suite name, General statistics (number of tests, number of succeeded test cases, number of failed test cases, success rate, total execution time), Pie chart which shows visually relation between succeeded and failed test cases, Test cases list (you can click on specific test case and drop down tree view will open that shows all test steps inside that specific test case)
+- Visual representation of tests results consists of: Test suite name, General statistics (number of tests, number of succeeded test cases, number of failed test cases, number of skipped test cases, success rate, total execution time), Pie chart which shows visually relation between succeeded, failed test cases and skipped test cases, Test cases list (you can click on specific test case and drop down tree view will open that shows all test steps inside that specific test case)
 
-- You can click on each test step and it will open its details. Success test step is green and it will open execution time for that step while failed test step is red and it will open execution time and list of assertions that failed for that particular test step
+- You can click on each test step and it will open its details. Success test step is green and it will open execution time for that step while failed test step is red and it will open execution time and list of assertions that failed for that particular test step. Skipped test step is orange and it will open execution for that step.
 
 In summary, this is how it all looks:
 
-![alt tag](examples/results_with_skipped.png)
+![alt tag](examples/results_with_skipped_tests.png)
 
 Good to know
 ----------------------
