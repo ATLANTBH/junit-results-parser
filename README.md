@@ -71,7 +71,7 @@ Usage Instructions
 
 In summary, this is how it all looks:
 
-![alt tag](examples/results_with_skipped_tests.png)
+![alt tag](examples/results_skipped.png)
 
 Good to know
 ----------------------
